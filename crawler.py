@@ -1,24 +1,27 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = "http://teaching.com.tw/member/case-list.php"
-html = requests.get(url)
-html.encoding = "big5"
-#print(html.text)
+class TutorCase:
+    url = ""
+    cases = []
 
-soup = BeautifulSoup(html.text, 'html.parser')
-cases = []
-titles = soup.select('tr[title="此案件可接洽"]')
-for title in titles:
-    case = []
-    flag = False
-    for inf in title.stripped_strings:
-        if (inf == "New!"):
-            flag = True
-            continue
-        case.append(inf)
-    if flag:
-        case.append("New")
-    else:
-        case.append("Old")
-    cases.append(case)
+    def __init__(self, url=""):
+        self.url = url
+        self.cases.clear()
+        html = requests.get(self.url)
+        html.encoding = "big5"
+        soup = BeautifulSoup(html.text, 'html.parser')
+        titles = soup.select('tr[title="此案件可接洽"]')
+        for title in titles:
+            case = []
+            for infor in title.stripped_strings:
+                case.append(infor)
+            if 'New!' not in case:
+                case.insert(4, "Old!")
+            self.cases.append(case)
+
+    def printCases(self):
+        for case in self.cases:
+            for infor in case:
+                print(infor, end=' ')
+            print("")
