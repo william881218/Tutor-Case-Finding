@@ -2,6 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 
 class TutorCase:
+
+    """
+    id, age, city, loc, new, subject, time
+    """
+    
     url = ""
     cases = []
 
@@ -20,8 +25,11 @@ class TutorCase:
                 case.insert(4, "Old!")
             self.cases.append(case)
 
-    def printCases(self):
+    def __str__(self):
+        _str = ""
         for case in self.cases:
             for infor in case:
-                print(infor, end=' ')
-            print("")
+                _str += str(infor)
+                _str += '; '
+            _str += '\n'
+        return _str
