@@ -1,4 +1,5 @@
 import requests
+from copy import copy
 from bs4 import BeautifulSoup
 
 class TutorCase:
@@ -6,7 +7,7 @@ class TutorCase:
     """
     id, age, city, loc, new, subject, time
     """
-    
+
     url = ""
     cases = []
 
@@ -32,4 +33,20 @@ class TutorCase:
                 _str += str(infor)
                 _str += '; '
             _str += '\n'
-        return _str
+        return _str + 'end'
+
+    def create(self):
+        tem = TutorCase(self)
+        return tem;
+
+    def select(self, target_list):
+        selected_cases = []
+        original_cases = self.cases
+        for clm, arg in target_list:
+            for case in original_cases:
+                #print(arg, ' vs. ', case[clm])
+                if (arg in case[clm]):
+                    selected_cases.append(case)
+            original_cases = selected_cases.copy()
+            selected_cases.clear()
+        self.cases = original_cases

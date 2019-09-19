@@ -1,8 +1,8 @@
 #!/Users/william881218/anaconda3/bin/python3
 from crawler import TutorCase
 import sys, getopt
-opts_list = "hi:a:c:l:n:s:t:u:d:f:"
-args_list = ["id=", "age=", "city=", "location=", "new=", "subject=", "time=", "url=", "day=", "frequent="]
+opts_list = "hi:a:c:l:n:s:t:u:d:f:p:"
+args_list = ["id=", "age=", "city=", "location=", "new=", "subject=", "time=", "url=", "day=", "frequent=", "price="]
 opts_dict = {"--id":0, "--age":1, "--city":2, "--location":3, "--new":4, "--subject":5, "--time":6, "--price":5, \
 "--day":6, "--frequent":6, "-i":0, "-a":1, "-c":2, "-l":3, "-n":4, "-s":5, "-t":6, "-p":5, "-d":6, "-f":6}
 """
@@ -21,7 +21,7 @@ def main(argv):
     except getopt.GetoptError:
         print_tutorial()
         sys.exit()
-    target = []
+    target_list = []
     for opt, arg in opts:
         if opt == '-h':
             print_tutorial()
@@ -29,11 +29,11 @@ def main(argv):
         elif opt in ('-u', '--url'):
             url = arg
         else:
-            target.append((opts_dict[opt], arg))
+            target_list.append((opts_dict[opt], arg))
     tutorCase = TutorCase(url)
-    for id, arg in target:
-        print(id, ':', arg)
+    tutorCase.select(target_list)
     print(tutorCase)
+
 
 if __name__ == '__main__':
     main(sys.argv[1:])
