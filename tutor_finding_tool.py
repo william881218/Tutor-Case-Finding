@@ -8,6 +8,7 @@ opts_dict = {"--id":0, "--age":1, "--city":2, "--location":3, "--new":4, "--subj
 """
 id, age, city, loc, new, subject, time
 """
+
 def print_tutorial():
     f_tutorial = open('argument_tutorial')
     for line in f_tutorial:
