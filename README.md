@@ -1,12 +1,11 @@
 ## Tutor Case Finding Tool
 
-
-####Usage
+###Usage
 It's a tool to select tutor cases with ideal age, time, location...etc. from http://teaching.com.tw/member/case-list.php.
 (Because this website doesn't support selection.)
 
 
-####How to use
+###How to use
 ```./tutor_finding_tool.py [-arguments]```
 Please make sure you have your python3 installed.
 arguments:
